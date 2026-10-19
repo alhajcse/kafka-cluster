@@ -32,31 +32,10 @@ A **multi-node Kafka cluster** splits every topic's partitions across multiple b
 
 ## 2. Architecture
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│               VM x.x.x.242 (host network)                  │
-│                                                              │
-│   ┌───────────────┐   ┌───────────────┐   ┌───────────────┐  │
-│   │   kafka-1     │   │   kafka-2     │   │   kafka-3     │  │
-│   │  node.id=1    │   │  node.id=2    │   │  node.id=3    │  │
-│   │               │   │               │   │               │  │
-│   │ broker +      │   │ broker +      │   │ broker +      │  │
-│   │ controller    │   │ controller    │   │ controller    │  │
-│   │               │   │               │   │               │  │
-│   │ EXTERNAL:9092 │   │ EXTERNAL:9095 │   │ EXTERNAL:9097 │  │
-│   │ INTERNAL:19092│   │ INTERNAL:19093│   │ INTERNAL:19094│  │
-│   │ CTRL:9093     │   │ CTRL:9094     │   │ CTRL:9096     │  │
-│   └───────┬───────┘   └───────┬───────┘   └───────┬───────┘  │
-│           │                   │                   │           │
-│           └───────────────────┼───────────────────┘           │
-│                               │                               │
-│              KRaft quorum: 2 of 3 must agree                 │
-└───────────────────────────────┬───────────────────────────────┘
-                                │
-                                ▼
-                    Spring Boot services (external)
-```
+![Kafka Multi-Node Architecture](./kafka-multi-node-architecture.svg)
 
+
+---
 ### Port map
 
 | Broker | External | Internal | Controller |
