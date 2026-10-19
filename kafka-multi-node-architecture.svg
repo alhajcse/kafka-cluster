@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 760" font-family="'Segoe UI', 'Helvetica', 'Arial', sans-serif">
+  <defs>
+    <!-- Gradient backgrounds -->
+    <linearGradient id="vmGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:0.05"/>
+      <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:0.10"/>
+    </linearGradient>
+    <linearGradient id="kafkaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#1e40af"/>
+    </linearGradient>
+    <linearGradient id="springGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#047857"/>
+    </linearGradient>
+    <linearGradient id="quorumGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.25"/>
+    </linearGradient>
+
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Arrow marker -->
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 L3,6 Z" fill="#475569"/>
+    </marker>
+
+    <!-- Dashed arrow -->
+    <marker id="arrowDashed" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 L3,6 Z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <!-- Title                                                     -->
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <text x="500" y="35" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">
+    Kafka Multi-Node Architecture (KRaft)
+  </text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#64748b">
+    3 Brokers + 3 Controllers · Combined Mode · High Availability
+  </text>
+
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <!-- VM Container                                              -->
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <rect x="40" y="85" width="920" height="470" rx="14" ry="14"
+        fill="url(#vmGradient)" stroke="#1e3a8a" stroke-width="2.5" stroke-dasharray="8,4"/>
+
+  <!-- VM Label -->
+  <rect x="60" y="100" width="270" height="32" rx="6" fill="#1e3a8a"/>
+  <text x="75" y="121" font-size="14" font-weight="700" fill="#ffffff">🖥  VM x.x.x.242</text>
+
+  <text x="345" y="121" font-size="12" fill="#64748b" font-style="italic">
+    host network · docker compose
+  </text>
+
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <!-- Broker 1                                                  -->
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="160" width="260" height="280" rx="10" ry="10"
+          fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+    <!-- Header -->
+    <rect x="70" y="160" width="260" height="46" rx="10" ry="10" fill="url(#kafkaGradient)"/>
+    <rect x="70" y="196" width="260" height="10" fill="url(#kafkaGradient)"/>
+    <text x="200" y="183" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">
+      kafka-1
+    </text>
+    <text x="200" y="200" text-anchor="middle" font-size="11" fill="#dbeafe">
+      node.id = 1
+    </text>
+
+    <!-- Role -->
+    <rect x="90" y="222" width="220" height="34" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="200" y="243" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">
+      ⚙  Broker + Controller
+    </text>
+
+    <!-- Ports -->
+    <g font-size="11">
+      <rect x="90" y="270" width="220" height="26" rx="4" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+      <text x="100" y="288" fill="#065f46" font-weight="600">EXTERNAL</text>
+      <text x="300" y="288" text-anchor="end" fill="#065f46" font-family="monospace">:9092</text>
+
+      <rect x="90" y="302" width="220" height="26" rx="4" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
+      <text x="100" y="320" fill="#92400e" font-weight="600">INTERNAL</text>
+      <text x="300" y="320" text-anchor="end" fill="#92400e" font-family="monospace">:19092</text>
+
+      <rect x="90" y="334" width="220" height="26" rx="4" fill="#fce7f3" stroke="#fbcfe8" stroke-width="1"/>
+      <text x="100" y="352" fill="#9f1239" font-weight="600">CONTROLLER</text>
+      <text x="300" y="352" text-anchor="end" fill="#9f1239" font-family="monospace">:9093</text>
+    </g>
+
+    <!-- Status -->
+    <circle cx="105" cy="395" r="7" fill="#10b981"/>
+    <text x="120" y="400" font-size="11" font-weight="600" fill="#047857">healthy</text>
+  </g>
+
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <!-- Broker 2                                                  -->
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="370" y="160" width="260" height="280" rx="10" ry="10"
+          fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+    <rect x="370" y="160" width="260" height="46" rx="10" ry="10" fill="url(#kafkaGradient)"/>
+    <rect x="370" y="196" width="260" height="10" fill="url(#kafkaGradient)"/>
+    <text x="500" y="183" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">
+      kafka-2
+    </text>
+    <text x="500" y="200" text-anchor="middle" font-size="11" fill="#dbeafe">
+      node.id = 2
+    </text>
+
+    <rect x="390" y="222" width="220" height="34" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="500" y="243" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">
+      ⚙  Broker + Controller
+    </text>
+
+    <g font-size="11">
+      <rect x="390" y="270" width="220" height="26" rx="4" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+      <text x="400" y="288" fill="#065f46" font-weight="600">EXTERNAL</text>
+      <text x="600" y="288" text-anchor="end" fill="#065f46" font-family="monospace">:9095</text>
+
+      <rect x="390" y="302" width="220" height="26" rx="4" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
+      <text x="400" y="320" fill="#92400e" font-weight="600">INTERNAL</text>
+      <text x="600" y="320" text-anchor="end" fill="#92400e" font-family="monospace">:19093</text>
+
+      <rect x="390" y="334" width="220" height="26" rx="4" fill="#fce7f3" stroke="#fbcfe8" stroke-width="1"/>
+      <text x="400" y="352" fill="#9f1239" font-weight="600">CONTROLLER</text>
+      <text x="600" y="352" text-anchor="end" fill="#9f1239" font-family="monospace">:9094</text>
+    </g>
+
+    <circle cx="405" cy="395" r="7" fill="#10b981"/>
+    <text x="420" y="400" font-size="11" font-weight="600" fill="#047857">healthy</text>
+  </g>
+
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <!-- Broker 3                                                  -->
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="670" y="160" width="260" height="280" rx="10" ry="10"
+          fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+    <rect x="670" y="160" width="260" height="46" rx="10" ry="10" fill="url(#kafkaGradient)"/>
+    <rect x="670" y="196" width="260" height="10" fill="url(#kafkaGradient)"/>
+    <text x="800" y="183" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">
+      kafka-3
+    </text>
+    <text x="800" y="200" text-anchor="middle" font-size="11" fill="#dbeafe">
+      node.id = 3
+    </text>
+
+    <rect x="690" y="222" width="220" height="34" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="800" y="243" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">
+      ⚙  Broker + Controller
+    </text>
+
+    <g font-size="11">
+      <rect x="690" y="270" width="220" height="26" rx="4" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+      <text x="700" y="288" fill="#065f46" font-weight="600">EXTERNAL</text>
+      <text x="900" y="288" text-anchor="end" fill="#065f46" font-family="monospace">:9097</text>
+
+      <rect x="690" y="302" width="220" height="26" rx="4" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
+      <text x="700" y="320" fill="#92400e" font-weight="600">INTERNAL</text>
+      <text x="900" y="320" text-anchor="end" fill="#92400e" font-family="monospace">:19094</text>
+
+      <rect x="690" y="334" width="220" height="26" rx="4" fill="#fce7f3" stroke="#fbcfe8" stroke-width="1"/>
+      <text x="700" y="352" fill="#9f1239" font-weight="600">CONTROLLER</text>
+      <text x="900" y="352" text-anchor="end" fill="#9f1239" font-family="monospace">:9096</text>
+    </g>
+
+    <circle cx="705" cy="395" r="7" fill="#10b981"/>
+    <text x="720" y="400" font-size="11" font-weight="600" fill="#047857">healthy</text>
+  </g>
+
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <!-- Quorum Connection (dashed arc)                            -->
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <path d="M 200 450 Q 200 490 500 490 Q 800 490 800 450"
+        fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4"/>
+  <path d="M 200 450 Q 500 510 800 450"
+        fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Quorum label -->
+  <rect x="360" y="500" width="280" height="34" rx="8" fill="url(#quorumGradient)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="500" y="522" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">
+     KRaft Quorum · 2 of 3 must agree
+  </text>
+
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <!-- Arrow down to Spring Boot                                 -->
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <line x1="500" y1="555" x2="500" y2="605"
+        stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <text x="520" y="585" font-size="11" fill="#64748b" font-style="italic">
+    bootstrap: 10.70.16.242:9092,9095,9097
+  </text>
+
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <!-- Spring Boot Services                                      -->
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="250" y="610" width="500" height="70" rx="12" ry="12"
+          fill="url(#springGradient)"/>
+    <text x="500" y="640" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">
+       Spring Boot Microservices
+    </text>
+    <text x="500" y="662" text-anchor="middle" font-size="12" fill="#d1fae5">
+      order-service · inventory-service · payment-service · notification-service
+    </text>
+  </g>
+
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <!-- Footer legend                                             -->
+  <!-- ═════════════════════════════════════════════════════════ -->
+  <g font-size="10" fill="#64748b">
+    <rect x="60" y="710" width="14" height="10" rx="2" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+    <text x="80" y="719">EXTERNAL (client)</text>
+
+    <rect x="200" y="710" width="14" height="10" rx="2" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
+    <text x="220" y="719">INTERNAL (broker-to-broker)</text>
+
+    <rect x="380" y="710" width="14" height="10" rx="2" fill="#fce7f3" stroke="#fbcfe8" stroke-width="1"/>
+    <text x="400" y="719">CONTROLLER (KRaft)</text>
+
+    <circle cx="540" cy="715" r="5" fill="#10b981"/>
+    <text x="552" y="719">healthy</text>
+
+    <line x1="630" y1="715" x2="660" y2="715" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,3"/>
+    <text x="668" y="719">quorum</text>
+  </g>
+
+  <!-- Generation info -->
+  <text x="960" y="740" text-anchor="end" font-size="9" fill="#94a3b8" font-style="italic">
+    Kafka Multi-Node KRaft · v1.0
+  </text>
+</svg>
